@@ -1,0 +1,55 @@
+Admin-auth{
+    admin-login✅
+}
+products { 
+    get-products✅
+    add Product ✅
+    get product by id✅
+    Delete Product✅
+    update product ❌
+}
+Order{
+    get-order-detail✅
+    get-order-detail❌
+}
+discount❌
+Inventory❌
+service { 
+    get service✅
+    add service✅
+    get-by-id -service✅
+    update-service✅
+    Delete service✅
+}
+customers { 
+    get-customers✅
+    add-customers✅
+    get-customer-by-id✅
+}
+
+----------------------------------------------------------------------------------
+update product❌
+get discount❌
+add discount ❌ (------)
+
+get-inventory ✅
+get-inventory-by-id ✅
+add invetory❌
+get order detail by id ✅
+
+-------------------------------------------------------------------------------------------------------
+updte-product ✅
+get-discount ✅
+delete-discount ✅
+add-discount ✅
+add-inventory ✅
+delete-customers✅
+
+--------------------------------------------------------------------------------------------------
+product complete --
+discount complete --
+inventory complete --
+order complete --
+service complete --
+customer complete --
+manage category complete --

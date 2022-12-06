@@ -1,0 +1,15 @@
+ADMIN {
+    Login Admin --
+    Get admin --
+    Delete Admin --
+    create admin --
+}
+CATEGORY { 
+    Get Category --
+    Add category --
+    Delete categpry by id --
+    delte all category --
+}
+SUBCATEGORY { 
+    get subcategpry --
+}
