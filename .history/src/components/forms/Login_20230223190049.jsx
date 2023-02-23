@@ -21,14 +21,14 @@ const Login = () => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      // const { data } = await axios.post(
-      //   "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/adminroute/login/Admin",
-      //   {
-      //     email,
-      //     password,
-      //   }
-      // );
-      // localStorage.setItem("token", data.token);
+      const { data } = await axios.post(
+        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/adminroute/login/Admin",
+        {
+          email,
+          password,
+        }
+      );
+      localStorage.setItem("token", data.token);
       navigate("/dashboard");
       toast.success("Welcome");
     } catch (err) {

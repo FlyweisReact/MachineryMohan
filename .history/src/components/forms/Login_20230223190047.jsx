@@ -28,7 +28,7 @@ const Login = () => {
       //     password,
       //   }
       // );
-      // localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token);
       navigate("/dashboard");
       toast.success("Welcome");
     } catch (err) {
