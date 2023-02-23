@@ -7,7 +7,7 @@ import Table from "react-bootstrap/Table";
 import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 import axios from "axios";
 
-const GetLeasling = () => {
+const Jobs = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [edit, setEdit] = useState(false);
   const [data, setData] = useState([]);
@@ -95,7 +95,7 @@ const GetLeasling = () => {
   const getService = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/leaselisting/get/leaselisting"
+        "/job/get/job"
       );
       setData(data);
     } catch (err) {
@@ -116,7 +116,7 @@ const GetLeasling = () => {
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
-            All Lease Listing
+            All Jobs
           </span>
           <Button
             variant="outline-success"
@@ -125,7 +125,7 @@ const GetLeasling = () => {
               setModalShow(true);
             }}
           >
-            Add Lease Listing
+            Add Job
           </Button>
         </div>
       </section>
@@ -142,13 +142,13 @@ const GetLeasling = () => {
       >
         <thead>
           <tr>
-            <th>Image</th>
-            <th>Property Name</th>
+          
+            <th>Job Name</th>
             <th>User</th>
             <th>Category</th>
             <th>Sub-Category</th>
             <th>Description</th>
-            <th>Price</th>
+            <th>Job Type</th>
             <th>Contact Details</th>
             <th>Location</th>
             <th>Actions</th>
@@ -157,19 +157,13 @@ const GetLeasling = () => {
         <tbody>
           {data?.map((i, index) => (
             <tr key={index}>
-              <td>
-                <img
-                  src="https://assets-news.housing.com/news/wp-content/uploads/2022/03/15102726/Vastu-for-flats-in-apartments.jpg"
-                  alt=""
-                  className="fast-food"
-                />
-              </td>
-              <td>{i.Property_name}</td>
+           
+              <td>{i.Job_name}</td>
               <td>{i.User}</td>
-              <td>{i.category}</td>
+              <td>{i.jobcategory}</td>
               <td>{i.subcategory}</td>
               <td>{i.Description}</td>
-              <td>₹{i.Product_price}</td>
+              <td>{i.Job_type}</td>
               <td>{i.Contact_number}</td>
               <td>{i.Location}</td>
               <td style={{ display: "flex", gap: "10px" }}>
@@ -185,4 +179,4 @@ const GetLeasling = () => {
   );
 };
 
-export default HOC(GetLeasling);
+export default HOC(Jobs);

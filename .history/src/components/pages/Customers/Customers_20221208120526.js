@@ -3,7 +3,9 @@
 import React from "react";
 import HOC from "../../layout/HOC";
 import Table from "react-bootstrap/Table";
-import { AiFillDelete } from "react-icons/ai";
+import {  AiFillDelete } from "react-icons/ai";
+
+
 
 const user = [
   {
@@ -32,6 +34,8 @@ const user = [
   },
 ];
 
+
+
 const Customers = () => {
   return (
     <>
@@ -54,7 +58,9 @@ const Customers = () => {
       >
         <thead>
           <tr>
-            <th>Image</th>
+          <th>
+            Image
+          </th>
             <th>Name</th>
             <th>Phone Number</th>
             <th> Email</th>
@@ -65,20 +71,16 @@ const Customers = () => {
         <tbody>
           {user.map((i, index) => (
             <tr key={index}>
-              <td>
-                <img
-                  src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png"
-                  alt=""
-                  className="fast-food"
-                  style={{ borderRadius: "100%" }}
-                />
-              </td>
+            <td>
+              {}
+            </td>
               <td>{i.name}</td>
               <td>{i.phone}</td>
               <td>{i.email}</td>
               <td>{i.role}</td>
               <td>
                 <div style={{ display: "flex", gap: "10px" }}>
+              
                   <AiFillDelete color="red" cursor="pointer" />
                 </div>
               </td>

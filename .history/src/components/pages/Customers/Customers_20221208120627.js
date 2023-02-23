@@ -70,7 +70,7 @@ const Customers = () => {
                   src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png"
                   alt=""
                   className="fast-food"
-                  style={{ borderRadius: "100%" }}
+                  style={{border}}
                 />
               </td>
               <td>{i.name}</td>

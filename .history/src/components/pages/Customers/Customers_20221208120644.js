@@ -79,7 +79,7 @@ const Customers = () => {
               <td>{i.role}</td>
               <td>
                 <div style={{ display: "flex", gap: "10px" }}>
-                  <AiFillDelete color="red" cursor="pointer" />
+                  <AiFillDelete color="red" cursor="pointer"  />
                 </div>
               </td>
             </tr>

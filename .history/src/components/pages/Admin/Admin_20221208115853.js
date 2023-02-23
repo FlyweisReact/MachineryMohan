@@ -18,7 +18,7 @@ const Admin = () => {
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/adminroute/get/Admin",
+        "https://setupbazaar.herokuapp.com/adminroute/get/Admin",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const Admin = () => {
       e.preventDefault();
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/adminroute/add/admin",
+          "https://setupbazaar.herokuapp.com/adminroute/add/admin",
           {
             name,
             email,
@@ -112,7 +112,7 @@ const Admin = () => {
   const deleteAdmin = async (id) => {
     try {
       const data = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/adminroute/delete/admin/${id}`,
+        `https://setupbazaar.herokuapp.com/adminroute/delete/admin/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

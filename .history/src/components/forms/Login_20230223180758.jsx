@@ -32,7 +32,7 @@ const Login = () => {
       navigate("/dashboard");
       toast.success("Welcome");
     } catch (err) {
-      alert("Invalid Credentials")
+      
     }
   };
 

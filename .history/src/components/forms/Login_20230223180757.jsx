@@ -32,7 +32,8 @@ const Login = () => {
       navigate("/dashboard");
       toast.success("Welcome");
     } catch (err) {
-      alert("Invalid Credentials")
+      console.log(err);
+      
     }
   };
 

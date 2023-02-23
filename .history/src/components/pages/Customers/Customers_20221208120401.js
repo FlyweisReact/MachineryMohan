@@ -3,34 +3,38 @@
 import React from "react";
 import HOC from "../../layout/HOC";
 import Table from "react-bootstrap/Table";
-import { AiFillDelete } from "react-icons/ai";
+import {  AiFillDelete } from "react-icons/ai";
+
+
 
 const user = [
   {
     name: "Raftaar",
     phone: 451236977,
-    email: "raftaar@gmail.com",
+    email: "r@gmail.com",
     role: "user",
   },
   {
-    name: "Amitabh",
+    name: "",
     phone: 451236977,
-    email: "amitabh@gmail.com",
+    email: "n@gmail.com",
     role: "user",
   },
   {
-    name: "Salman",
+    name: "Java",
     phone: 451236977,
-    email: "salman@gmail.com",
+    email: "j@gmail.com",
     role: "user",
   },
   {
-    name: "Ranveer",
+    name: "Django",
     phone: 451236977,
-    email: "ranveer@gmail.com",
+    email: "d@gmail.com",
     role: "user",
   },
 ];
+
+
 
 const Customers = () => {
   return (
@@ -54,7 +58,6 @@ const Customers = () => {
       >
         <thead>
           <tr>
-            <th>Image</th>
             <th>Name</th>
             <th>Phone Number</th>
             <th> Email</th>
@@ -65,20 +68,13 @@ const Customers = () => {
         <tbody>
           {user.map((i, index) => (
             <tr key={index}>
-              <td>
-                <img
-                  src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png"
-                  alt=""
-                  className="fast-food"
-                  style={{ borderRadius: "100%" }}
-                />
-              </td>
               <td>{i.name}</td>
               <td>{i.phone}</td>
               <td>{i.email}</td>
               <td>{i.role}</td>
               <td>
                 <div style={{ display: "flex", gap: "10px" }}>
+              
                   <AiFillDelete color="red" cursor="pointer" />
                 </div>
               </td>

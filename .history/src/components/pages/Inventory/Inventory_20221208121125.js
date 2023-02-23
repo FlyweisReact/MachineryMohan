@@ -8,15 +8,14 @@ import { Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const SubCategory = () => {
+const Inventory = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [data, setData] = useState([]);
-  const [parent, setP] = useState([]);
 
   const fetchData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
+        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/category/get/category"
       );
       setData(data);
     } catch (err) {
@@ -24,39 +23,26 @@ const SubCategory = () => {
     }
   }, []);
 
-  const fetchCategory = useCallback(async () => {
-    try {
-      const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/category/get/category"
-      );
-      setP(data);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
   useEffect(() => {
     fetchData();
-    fetchCategory();
-  }, [fetchData, fetchCategory]);
+  }, [fetchData]);
 
   const token = localStorage.getItem("token");
 
   function MyVerticallyCenteredModal(props) {
     const [name, setName] = useState("");
     const [Image, setI] = useState("");
-    const [category, setC] = useState("");
 
     const submitHandler = async (e) => {
       e.preventDefault();
+
       let fd = new FormData();
-      fd.append("subpic", Image);
-      fd.append("subcategory", name);
-      fd.append("Category", category);
+      fd.append("myField", Image);
+      fd.append("category", name);
 
       try {
         const data = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/add/subcategory",
+          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/category/add/category",
           fd,
           {
             headers: {
@@ -64,7 +50,7 @@ const SubCategory = () => {
             },
           }
         );
-        toast.success("Sub-Category added Successfully");
+        toast.success("Category added Successfully");
         setModalShow(false);
         fetchData();
       } catch (err) {
@@ -93,22 +79,6 @@ const SubCategory = () => {
                 onChange={(e) => setI(e.target.files[0])}
               />
             </Form.Group>
-
-            <Form.Select
-              aria-label="Default select example"
-              onChange={(e) => setC(e.target.value)}
-            >
-              <option>Select Parent Category</option>
-              {parent?.categories?.map((i, index) => (
-                <option key={index} value={i._id}>
-                  {" "}
-                  {i.category}{" "}
-                </option>
-              ))}
-            </Form.Select>
-
-            <br />
-
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Category Name</Form.Label>
               <Form.Control
@@ -129,7 +99,7 @@ const SubCategory = () => {
   const deleteCat = async (id) => {
     try {
       const data = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/delete/${id}`,
+        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/category/delete/category/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -146,14 +116,14 @@ const SubCategory = () => {
   const deleteAll = async () => {
     try {
       const data = await axios.delete(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/deleteall",
+        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/category/deleteall",
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      toast.success("All Sub-Categories Deleted");
+      toast.success("All Categories Deleted");
       fetchData();
     } catch (err) {
       console.log(err);
@@ -169,18 +139,18 @@ const SubCategory = () => {
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
-            All Sub-Categories
+            All Categories
           </span>
           <div>
             <Button variant="outline-danger" onClick={() => deleteAll()}>
-              Delete All Sub-Categories
+              Delete All Categories
             </Button>
             <Button
               variant="outline-success"
               onClick={() => setModalShow(true)}
               style={{ marginLeft: "10px" }}
             >
-              Add Sub-Categories
+              Add Category
             </Button>
           </div>
         </div>
@@ -200,26 +170,16 @@ const SubCategory = () => {
           <tr>
             <th>Image</th>
             <th>Category</th>
-            <th>Parent Category</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {data?.map((i, index) => (
+          {data?.categories?.map((i, index) => (
             <tr key={index}>
               <td>
-                <img
-                  src={
-                    i.SubcategoryImg
-                      ? i.SubcategoryImg
-                      : "https://img.freepik.com/free-psd/3d-square-with-tiktok-logo_125540-1569.jpg?w=2000"
-                  }
-                  alt=""
-                  className="fast-food"
-                />
+                <img src={i.categoryimg ? i.categoryimg : ''} alt="" className="fast-food" />
               </td>
-              <td> {i.subcategory} </td>
-              <td> {i.Category} </td>
+              <td> {i.category} </td>
               <td>
                 <AiFillDelete
                   color="red"
@@ -235,4 +195,4 @@ const SubCategory = () => {
   );
 };
 
-export default HOC(SubCategory);
+export default HOC(Inventory);
