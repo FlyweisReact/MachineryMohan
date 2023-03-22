@@ -245,7 +245,8 @@ const Products = () => {
     }
   };
 
-  const StatusChange = async (e) => {
+  const StatusChange = async (e, id) => {
+    e.preve
     try {
       const { data } = await axios.post(
         `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/product/status/${id}`
@@ -324,10 +325,7 @@ const Products = () => {
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdvOT-7l-HW2UwCZv-aGIo7wtosNM1vOhvy5vExE8T9owZyjoINMQ3V8ff_AGZjhaWTEY&usqp=CAU"
                       alt=""
                       style={{ width: "50px", cursor: "pointer" }}
-                      onClick={() => {
-                        setID(i._id);
-                        StatusChange();
-                      }}
+                      onClick={() => StatusChange(i._id)}
                     />
                   </div>
                 </td>

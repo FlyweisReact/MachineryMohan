@@ -76,13 +76,12 @@ code {
   display: flex;
   gap: 10px;
   border: 1px solid black;
-  padding: 5px;
+  padding: 10px;
   width: 400px;
-  margin-bottom: 3%;
 }
 .Search i{
   color : #000;
-  padding-top: 8px;
+  padding-top: 5px;
 }
 
 .Search input {
@@ -90,5 +89,4 @@ code {
   outline: none;
   font-size: 20px;
   color: #000;
-  width: 100%;
 }

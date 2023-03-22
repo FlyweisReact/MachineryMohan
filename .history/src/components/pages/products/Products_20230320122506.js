@@ -1,10 +1,13 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Button, Modal, Form, Container } from "react-bootstrap";
 import HOC from "../../layout/HOC";
 import Table from "react-bootstrap/Table";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import {
+  AiFillDelete,
+  AiFillEdit,
+} from "react-icons/ai";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -245,18 +248,18 @@ const Products = () => {
     }
   };
 
-  const StatusChange = async (e) => {
-    try {
-      const { data } = await axios.post(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/product/status/${id}`
-      );
-      toast.success(data.message);
-      fetchData();
-    } catch (e) {
-      console.log(e);
-      toast.error("Try again after some time...");
+
+  const StatusChange = async (e , id) => {
+    e.preventDefault()
+    try{
+      const { data } = await axios.post(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/product/status/${id}`)
+      toast.success(data.message)
+      fetchData()
+    }catch(e){
+      console.log(e)
+      toast.error('Try again after some time...')
     }
-  };
+  }
 
   return (
     <>
@@ -309,28 +312,15 @@ const Products = () => {
                 <td> {i.Description} </td>
                 <td> {i.Product_type} </td>
                 <td> {i.Contact_number} </td>
-                <td> {i.Location} </td>
+                <td> {i.Location} </td> 
                 <td>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "10px",
-                      alignItems: "center",
-                    }}
-                  >
-                    <p>{i.status}</p>
+                <div style={{display : 'flex' , gap : '10px'}}>
 
-                    <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdvOT-7l-HW2UwCZv-aGIo7wtosNM1vOhvy5vExE8T9owZyjoINMQ3V8ff_AGZjhaWTEY&usqp=CAU"
-                      alt=""
-                      style={{ width: "50px", cursor: "pointer" }}
-                      onClick={() => {
-                        setID(i._id);
-                        StatusChange();
-                      }}
-                    />
-                  </div>
-                </td>
+                {i.status}
+
+                </div>
+                
+                 </td> 
                 <td>
                   <div style={{ display: "flex", gap: "10px" }}>
                     <AiFillDelete

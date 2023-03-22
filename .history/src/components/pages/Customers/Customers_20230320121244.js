@@ -9,8 +9,8 @@ import { toast } from "react-toastify";
 
 const Customers = () => {
   const [data, setData] = useState([]);
-  const [dataCount, setDataCount] = useState("");
-  const [query, setQuery] = useState("");
+  const [ dataCount , setDataCount ] = useState('')
+  const [ query , setQuery ] = useState("")
 
   const fetchData = async () => {
     try {
@@ -18,7 +18,7 @@ const Customers = () => {
         "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/userroute/allUsers"
       );
       setData(data);
-      setDataCount(data.data.length);
+      setDataCount(data.data.length)
     } catch (e) {
       console.log(e);
     }
@@ -35,7 +35,7 @@ const Customers = () => {
       );
       console.log(data);
       toast.success("User Deleted Succesfully");
-      fetchData();
+      fetchData()
     } catch (err) {
       console.log(err);
     }
@@ -45,10 +45,12 @@ const Customers = () => {
     ? data?.data
     : data?.data?.filter(
         (i) =>
-          i?._id?.toLowerCase().includes(query?.toLowerCase()) ||
+          i?.name?.toLowerCase().includes(query?.toLowerCase()) ||
           i?.mobile?.toString()?.toLowerCase().includes(query?.toLowerCase()) ||
-          i?.email?.toLowerCase().includes(query?.toLowerCase())
+          i?.category?.toLowerCase().includes(query?.toLowerCase())
       );
+
+  
 
   return (
     <>
@@ -59,16 +61,6 @@ const Customers = () => {
           </span>
         </div>
       </section>
-
-      <div className="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input
-          type="search"
-          placeholder="Email , Id , Mobile number ..."
-          onChange={(e) => setQuery(e.target.value)}
-        />
-      </div>
-
       <Table
         striped
         bordered
@@ -81,8 +73,8 @@ const Customers = () => {
       >
         <thead>
           <tr>
-            <th>SNo.</th>
-            <th> ID </th>
+          <th>SNo.</th>
+          <th> ID </th>
             <th>Name</th>
             <th>Phone Number</th>
             <th> Email</th>
@@ -91,10 +83,10 @@ const Customers = () => {
           </tr>
         </thead>
         <tbody>
-          {filterData?.map((i, index) => (
+          {data?.data?.map((i, index) => (
             <tr key={index}>
-              <td> {index + 1} </td>
-              <td> {i._id} </td>
+            <td> {index + 1} </td>
+            <td> {i._id} </td>
               <td>{i.full_name}</td>
               <td>{i.mobile}</td>
               <td>{i.email}</td>
