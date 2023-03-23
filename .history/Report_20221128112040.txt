@@ -1,3 +1,0 @@
-ADMIN {
-    Login Admin 
-}
