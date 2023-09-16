@@ -15,7 +15,7 @@ const Jobs = () => {
   const getService = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/job/get/job"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/job/get/job"
       );
       setData(data);
     } catch (err) {
@@ -33,7 +33,7 @@ const Jobs = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`
         );
         setEach(data[0]);
         console.log(data)

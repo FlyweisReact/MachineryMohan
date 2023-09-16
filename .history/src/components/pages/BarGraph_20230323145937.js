@@ -8,7 +8,7 @@ const BarGraph = () => {
 
     const filterData = async (name) => {
         try{
-          const { data } = await axios.get(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/adminroute/filter?filter=${name. < 4 ? "today" : name}`)
+          const { data } = await axios.get(`http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/adminroute/filter?filter=${name. < 4 ? "today" : name}`)
           console.log(data)
         
         }catch(e){

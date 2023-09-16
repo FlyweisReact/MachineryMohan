@@ -17,7 +17,7 @@ const Complaint = () => {
   const getData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/package"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/package"
       );
       setData(data);
     } catch (err) {
@@ -30,35 +30,40 @@ const Complaint = () => {
   }, [getData]);
 
   function MyVerticallyCenteredModal(props) {
-
-    const [price , setPrice  ] = useState("")
-    const [ valid , setValid] = useState("")
-    const [desc , setDesc ] = useState("")
+    const [price, setPrice] = useState("");
+    const [valid, setValid] = useState("");
+    const [desc, setDesc] = useState("");
 
     const postData = async (e) => {
-      e.preventDefault()
-      try{
-          const { data } = await axios.post("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/package" , {price  , desc , valid } )
-          console.log(data)
-          props.onHide()
-          toast.success("Package Added")
-          getData()
-      }catch(err){
-        console.log(err)
+      e.preventDefault();
+      try {
+        const { data } = await axios.post(
+          "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/package",
+          { price, desc, valid }
+        );
+        console.log(data);
+        props.onHide();
+        toast.success("Package Added");
+        getData();
+      } catch (err) {
+        console.log(err);
       }
-    }
+    };
     const EditHandler = async (e) => {
-      e.preventDefault()
-      try{
-          const { data } = await axios.put(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/package/update/${id}` , {price  , desc , valid } )
-          console.log(data)
-          props.onHide()
-          toast.success("Package Edited")
-          getData()
-      }catch(err){
-        console.log(err)
+      e.preventDefault();
+      try {
+        const { data } = await axios.put(
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/package/update/${id}`,
+          { price, desc, valid }
+        );
+        console.log(data);
+        props.onHide();
+        toast.success("Package Edited");
+        getData();
+      } catch (err) {
+        console.log(err);
       }
-    }
+    };
 
     return (
       <Modal
@@ -75,17 +80,23 @@ const Complaint = () => {
         <Modal.Body>
           <Container>
             <Form onSubmit={edit ? EditHandler : postData}>
-              
               <Form.Group className="mb-3">
                 <Form.Label>Price</Form.Label>
-                <Form.Control type="number" min={1} onChange={(e) => setPrice(e.target.value)} />
+                <Form.Control
+                  type="number"
+                  min={1}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <Form.Label>Valid</Form.Label>
-                <Form.Control type="date"  onChange={(e) => setValid(e.target.value)} />
+                <Form.Control
+                  type="date"
+                  onChange={(e) => setValid(e.target.value)}
+                />
               </Form.Group>
-              
+
               <FloatingLabel
                 controlId="floatingTextarea"
                 label="Description"
@@ -97,26 +108,27 @@ const Complaint = () => {
                   onChange={(e) => setDesc(e.target.value)}
                 />
               </FloatingLabel>
-        <Button type='submit'>Submit</Button>
+              <Button type="submit">Submit</Button>
             </Form>
           </Container>
         </Modal.Body>
-        <Modal.Footer>
-        </Modal.Footer>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     );
   }
 
   const deleteData = async (id) => {
-    try{
-      const { data } = await axios.delete(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/package/delete/${id}`)
-      console.log(data)
-      getData()
-      toast.success("Package Deleted ")
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.delete(
+        `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/package/delete/${id}`
+      );
+      console.log(data);
+      getData();
+      toast.success("Package Deleted ");
+    } catch (e) {
+      console.log(e);
     }
-  } 
+  };
 
   return (
     <>
@@ -158,14 +170,18 @@ const Complaint = () => {
               <td>{i.valid}</td>
               <td>{i.desc}</td>
               <td>
-              <div className="d-flex g-2">
-              <AiFillDelete color="red" onClick={() => deleteData(i._id)} />
-              <i class="fa-solid fa-pen-to-square" style={{color : '#0b64fe' , cursor : 'pointer'}} onClick={() => {
-                setId(i._id)
-                setEdit(true)
-                setModalShow(true)
-              }} ></i>
-              </div>
+                <div className="d-flex g-2">
+                  <AiFillDelete color="red" onClick={() => deleteData(i._id)} />
+                  <i
+                    class="fa-solid fa-pen-to-square"
+                    style={{ color: "#0b64fe", cursor: "pointer" }}
+                    onClick={() => {
+                      setId(i._id);
+                      setEdit(true);
+                      setModalShow(true);
+                    }}
+                  ></i>
+                </div>
               </td>
             </tr>
           ))}

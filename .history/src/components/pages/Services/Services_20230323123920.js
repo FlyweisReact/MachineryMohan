@@ -4,21 +4,21 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button, Modal, Form, Container, FloatingLabel } from "react-bootstrap";
 import HOC from "../../layout/HOC";
 import Table from "react-bootstrap/Table";
-import {  AiFillDelete } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Services = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [data, setData] = useState([]);
-  const [ subCategory , setSC] = useState([])
+  const [subCategory, setSC] = useState([]);
   const [id, setId] = useState("");
   const [view, setView] = useState(false);
 
   const getService = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/service/get/service"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/service/get/service"
       );
       setData(data);
     } catch (err) {
@@ -26,19 +26,20 @@ const Services = () => {
     }
   }, []);
 
-  
   const getSubCategory = async () => {
-    try{
-      const { data }  = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory")
-      setSC(data)
-    }catch(err){
-      console.log(err)
+    try {
+      const { data } = await axios.get(
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
+      );
+      setSC(data);
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     getService();
-    getSubCategory()
+    getSubCategory();
   }, [getService]);
 
   function MyVerticallyCenteredModal(props) {
@@ -64,7 +65,7 @@ const Services = () => {
       });
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/service/addByadmin",
+          "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/service/addByadmin",
           fd
         );
         console.log(data);
@@ -132,15 +133,20 @@ const Services = () => {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3" >
-                <Form.Label>Sub-Category</Form.Label> 
-                <Form.Select aria-label="Default select example" onChange={(e) => setSubCategory(e.target.value)} >
-      <option>Open this select Sub-Category</option>
-      {subCategory?.map((i ,index) => (
-        <option key={index} value={i._id}> {i.subcategory} </option>
-      ))}
-      
-    </Form.Select>
+              <Form.Group className="mb-3">
+                <Form.Label>Sub-Category</Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setSubCategory(e.target.value)}
+                >
+                  <option>Open this select Sub-Category</option>
+                  {subCategory?.map((i, index) => (
+                    <option key={index} value={i._id}>
+                      {" "}
+                      {i.subcategory}{" "}
+                    </option>
+                  ))}
+                </Form.Select>
               </Form.Group>
 
               <FloatingLabel
@@ -154,10 +160,7 @@ const Services = () => {
                 />
               </FloatingLabel>
 
-              <Button
-                variant="outline-success"
-               type="submit"
-              >
+              <Button variant="outline-success" type="submit">
                 Submit
               </Button>
             </Form>
@@ -169,15 +172,17 @@ const Services = () => {
   }
 
   const deleteData = async (id) => {
-    try{
-      const { data }  = await axios.delete(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/service//deletebyid/${id}`)
-      console.log(data)
-      toast.success("Deleted")
-      getService()
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.delete(
+        `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/service//deletebyid/${id}`
+      );
+      console.log(data);
+      toast.success("Deleted");
+      getService();
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   function ViewModal(props) {
     const [each, setEach] = useState([]);
@@ -185,10 +190,10 @@ const Services = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/service/get/${id}`
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/service/get/${id}`
         );
         setEach(data[0]);
-        console.log(data)
+        console.log(data);
       } catch (e) {
         console.log(e);
       }
@@ -340,14 +345,18 @@ const Services = () => {
               <td>{i.Conatct_number}</td>
               <td>{i.About_service}</td>
               <td>
-                <AiFillDelete color="red" cursor="pointer" onClick={() => deleteData(i._id)} />
+                <AiFillDelete
+                  color="red"
+                  cursor="pointer"
+                  onClick={() => deleteData(i._id)}
+                />
                 <i
-                    className="fa-solid fa-eye"
-                    onClick={() => {
-                      setId(i._id);
-                      setView(true);
-                    }}
-                  ></i>
+                  className="fa-solid fa-eye"
+                  onClick={() => {
+                    setId(i._id);
+                    setView(true);
+                  }}
+                ></i>
               </td>
             </tr>
           ))}

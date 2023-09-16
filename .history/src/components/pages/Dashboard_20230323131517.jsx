@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   const fetchTotalCategory = async () => {
     try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/category/get/category")
+      const { data } = await axios.get("http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/category/get/category")
       setCategoryCount(data.total)
     }catch(e){
       console.log(e)
@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   const fetchTotalProducts = async () => {
     try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/product//get/product")
+      const { data } = await axios.get("http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/product//get/product")
       setProductCount(data.total)
     }catch(e){
       console.log(e)
@@ -33,7 +33,7 @@ const Dashboard = () => {
 
   const fetchTotalUsers = async () => {
     try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/userroute/total")
+      const { data } = await axios.get("http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/userroute/total")
       setUserCount(data.Users)
     }catch(e){
       console.log(e)
@@ -42,7 +42,7 @@ const Dashboard = () => {
 
   const filterData = async (name) => {
     try{
-      const { data } = await axios.get(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/adminroute/filter?filter=${name}`)
+      const { data } = await axios.get(`http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/adminroute/filter?filter=${name}`)
       console.log(data)
     }catch(e){
       console.log(e)

@@ -6,7 +6,6 @@ import Table from "react-bootstrap/Table";
 import axios from "axios";
 import { Modal, Container } from "react-bootstrap";
 
-
 const Jobs = () => {
   const [data, setData] = useState([]);
   const [id, setId] = useState("");
@@ -15,7 +14,7 @@ const Jobs = () => {
   const getService = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/job/get/job"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/job/get/job"
       );
       setData(data);
     } catch (err) {
@@ -33,10 +32,10 @@ const Jobs = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/job/get/63fdbef0a2a3dc2f34705f3e/${id}`
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/job/get/63fdbef0a2a3dc2f34705f3e/${id}`
         );
         setEach(data[0]);
-        console.log(data)
+        console.log(data);
       } catch (e) {
         console.log(e);
       }
@@ -124,14 +123,13 @@ const Jobs = () => {
 
   return (
     <>
-         <ViewModal show={view} onHide={() => setView(false)} />
+      <ViewModal show={view} onHide={() => setView(false)} />
 
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
             All Jobs
           </span>
-   
         </div>
       </section>
 
@@ -147,7 +145,6 @@ const Jobs = () => {
       >
         <thead>
           <tr>
-          
             <th>Job Name</th>
             <th>User</th>
             <th>Category</th>
@@ -171,13 +168,13 @@ const Jobs = () => {
               <td>{i.Contact_number}</td>
               <td>{i.Location}</td>
               <td>
-              <i
+                <i
                   className="fa-solid fa-eye"
-                    onClick={() => {
-                      setId(i._id);
-                      setView(true);
-                    }}
-                  ></i>
+                  onClick={() => {
+                    setId(i._id);
+                    setView(true);
+                  }}
+                ></i>
               </td>
             </tr>
           ))}

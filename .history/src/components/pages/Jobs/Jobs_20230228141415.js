@@ -11,7 +11,7 @@ const Jobs = () => {
   const getService = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/job/get/job"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/job/get/job"
       );
       setData(data);
     } catch (err) {
@@ -25,13 +25,11 @@ const Jobs = () => {
 
   return (
     <>
-     
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
             All Jobs
           </span>
-   
         </div>
       </section>
 
@@ -47,7 +45,6 @@ const Jobs = () => {
       >
         <thead>
           <tr>
-          
             <th>Job Name</th>
             <th>User</th>
             <th>Category</th>
@@ -61,7 +58,6 @@ const Jobs = () => {
         <tbody>
           {data?.map((i, index) => (
             <tr key={index}>
-           
               <td>{i.Job_name}</td>
               <td>{i.User}</td>
               <td>{i.jobcategory}</td>
@@ -70,7 +66,6 @@ const Jobs = () => {
               <td>{i.Job_type}</td>
               <td>{i.Contact_number}</td>
               <td>{i.Location}</td>
-              
             </tr>
           ))}
         </tbody>

@@ -12,23 +12,25 @@ const GetLeasling = () => {
   const [modalShow, setModalShow] = React.useState(false);
 
   const [data, setData] = useState([]);
-  const [ subCategory , setSC] = useState([])
+  const [subCategory, setSC] = useState([]);
   const [id, setId] = useState("");
   const [view, setView] = useState(false);
 
   const getSubCategory = async () => {
-    try{
-      const { data }  = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory")
-      setSC(data)
-    }catch(err){
-      console.log(err)
+    try {
+      const { data } = await axios.get(
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
+      );
+      setSC(data);
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   const getService = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/leaselisting/get/leaselisting"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/leaselisting/get/leaselisting"
       );
       setData(data);
     } catch (err) {
@@ -38,41 +40,44 @@ const GetLeasling = () => {
 
   useEffect(() => {
     getService();
-    getSubCategory()
+    getSubCategory();
   }, [getService]);
 
   function MyVerticallyCenteredModal(props) {
     const [subcategory, setSubcategory] = useState("");
-    const [Property_name , setProperty_name] = useState("");
-    const [Description , setDescription] = useState("");
-    const [Product_price , setProduct_price] = useState("");
-    const [Contact_number , setContact_number] = useState("");
-    const [Location , setLocation] = useState("");
-    const [leaselisting_images ,setleaselisting_images] = useState("");
+    const [Property_name, setProperty_name] = useState("");
+    const [Description, setDescription] = useState("");
+    const [Product_price, setProduct_price] = useState("");
+    const [Contact_number, setContact_number] = useState("");
+    const [Location, setLocation] = useState("");
+    const [leaselisting_images, setleaselisting_images] = useState("");
 
     const postData = async (e) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      const fd= new FormData()
-      fd.append("subcategory" , subcategory)
-      fd.append("Property_name" , Property_name)
-      fd.append("Description" , Description)
-      fd.append("Product_price" , Product_price)
-      fd.append("Contact_number" , Contact_number)
-      fd.append("Location" , Location)
+      const fd = new FormData();
+      fd.append("subcategory", subcategory);
+      fd.append("Property_name", Property_name);
+      fd.append("Description", Description);
+      fd.append("Product_price", Product_price);
+      fd.append("Contact_number", Contact_number);
+      fd.append("Location", Location);
       Array.from(leaselisting_images).forEach((img) => {
-        fd.append("leaselisting_images" , img)
-      })
-      try{
-        const { data } = await axios.post("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/leaselisting/addByadmin/" , fd)
-        console.log(data)
-        toast.success("Added")
-        getService()
-        props.onHide()
-      }catch(err){
-        console.log(err)
+        fd.append("leaselisting_images", img);
+      });
+      try {
+        const { data } = await axios.post(
+          "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/leaselisting/addByadmin/",
+          fd
+        );
+        console.log(data);
+        toast.success("Added");
+        getService();
+        props.onHide();
+      } catch (err) {
+        console.log(err);
       }
-    }
+    };
 
     return (
       <Modal
@@ -84,57 +89,79 @@ const GetLeasling = () => {
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">Add</Modal.Title>
         </Modal.Header>
-        <Modal.Body >
+        <Modal.Body>
           <Container>
             <Form onSubmit={postData}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Image</Form.Label>
-                <Form.Control type="file" onChange={(e) => setleaselisting_images(e.target.files)} multiple />
+                <Form.Control
+                  type="file"
+                  onChange={(e) => setleaselisting_images(e.target.files)}
+                  multiple
+                />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" onChange={(e) => setProperty_name(e.target.value)} />
+                <Form.Control
+                  type="text"
+                  onChange={(e) => setProperty_name(e.target.value)}
+                />
               </Form.Group>
-            
+
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Price</Form.Label>
-                <Form.Control type="num" min={0} onChange={(e) => setProduct_price(e.target.value)} />
+                <Form.Control
+                  type="num"
+                  min={0}
+                  onChange={(e) => setProduct_price(e.target.value)}
+                />
               </Form.Group>
-            
+
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Contact Number</Form.Label>
-                <Form.Control type="tel" pattern="[0-9]{10}" onChange={(e) => setContact_number(e.target.value)} />
+                <Form.Control
+                  type="tel"
+                  pattern="[0-9]{10}"
+                  onChange={(e) => setContact_number(e.target.value)}
+                />
               </Form.Group>
-            
+
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Location</Form.Label>
-                <Form.Control type="text" onChange={(e) => setLocation(e.target.value)} />
+                <Form.Control
+                  type="text"
+                  onChange={(e) => setLocation(e.target.value)}
+                />
               </Form.Group>
-            
 
               <FloatingLabel
                 controlId="floatingTextarea"
                 label="Description"
                 className="mb-3"
               >
-                <Form.Control as="textarea" onChange={(e) => setDescription(e.target.value)}  />
+                <Form.Control
+                  as="textarea"
+                  onChange={(e) => setDescription(e.target.value)}
+                />
               </FloatingLabel>
 
-              <Form.Group className="mb-3" >
-                <Form.Label>Sub-Category</Form.Label> 
-                <Form.Select aria-label="Default select example" onChange={(e) => setSubcategory(e.target.value)} >
-      <option>Open this select Sub-Category</option>
-      {subCategory?.map((i ,index) => (
-        <option key={index} value={i._id}> {i.subcategory} </option>
-      ))}
-      
-    </Form.Select>
+              <Form.Group className="mb-3">
+                <Form.Label>Sub-Category</Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={(e) => setSubcategory(e.target.value)}
+                >
+                  <option>Open this select Sub-Category</option>
+                  {subCategory?.map((i, index) => (
+                    <option key={index} value={i._id}>
+                      {" "}
+                      {i.subcategory}{" "}
+                    </option>
+                  ))}
+                </Form.Select>
               </Form.Group>
 
-              <Button
-                variant="outline-success"
-                type='submit'
-              >
+              <Button variant="outline-success" type="submit">
                 Submit
               </Button>
             </Form>
@@ -145,20 +172,18 @@ const GetLeasling = () => {
     );
   }
 
-
-  
   const deleteData = async (id) => {
-    try{
-      const { data }  = await axios.delete(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/leaselisting/deletebyid/${id}`)
-      console.log(data)
-      toast.success("Deleted")
-      getService()
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.delete(
+        `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/leaselisting/deletebyid/${id}`
+      );
+      console.log(data);
+      toast.success("Deleted");
+      getService();
+    } catch (e) {
+      console.log(e);
     }
-  }
-
-
+  };
 
   return (
     <>
@@ -226,7 +251,11 @@ const GetLeasling = () => {
               <td>{i.Contact_number}</td>
               <td>{i.Location}</td>
               <td style={{ display: "flex", gap: "10px" }}>
-                <AiFillDelete color="red" cursor="pointer" onClick={() => deleteData(i._id)} />
+                <AiFillDelete
+                  color="red"
+                  cursor="pointer"
+                  onClick={() => deleteData(i._id)}
+                />
               </td>
             </tr>
           ))}

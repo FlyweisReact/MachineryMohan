@@ -19,7 +19,7 @@ const Machine = () => {
   const getAllMachine = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
       );
       setData(data);
     } catch (err) {
@@ -30,7 +30,7 @@ const Machine = () => {
   const getSubCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
       );
       setSC(data);
     } catch (err) {
@@ -86,7 +86,7 @@ const Machine = () => {
 
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
+          "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
           fd
         );
         console.log(data);
@@ -102,8 +102,21 @@ const Machine = () => {
       e.preventDefault();
       try {
         const { data } = await axios.patch(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
-          {Machine_name , Condition , Price , Location , Conatct_number , Features , About_company , Output_paper_width , Capacity  , Model_name_number , Brand , Model_no}
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
+          {
+            Machine_name,
+            Condition,
+            Price,
+            Location,
+            Conatct_number,
+            Features,
+            About_company,
+            Output_paper_width,
+            Capacity,
+            Model_name_number,
+            Brand,
+            Model_no,
+          }
         );
         console.log(data);
         props.onHide();
@@ -129,280 +142,282 @@ const Machine = () => {
         <Modal.Body>
           <Container>
             <Form onSubmit={edit ? EditHandler : addProduct}>
-            {edit ?  <>
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setMachineName(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Condition</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setCondition(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Price</Form.Label>
-                <Form.Control
-                  type="number"
-                  min={1}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Location</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Contact Number</Form.Label>
-                <Form.Control
-                  type="tel"
-                  pattern="[0-9]{10}"
-                  onChange={(e) => setContactNumber(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Speed</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setSpeed(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Output Paper Width</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setOutput_paper_width(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Capacity</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setCapacity(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Model Number</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setModel_no(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Model Name Number</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setModel_name_number(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Brand</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setBrand(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Machine Image</Form.Label>
-                <Form.Control
-                  type="file"
-                  multiple
-                  onChange={(e) => setmachine_images(e.target.files)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Sub-Category</Form.Label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setsubcategory(e.target.value)}
-                >
-                  <option>Open this select Sub-Category</option>
-                  {subCategory?.map((i, index) => (
-                    <option key={index} value={i._id}>
-                      {" "}
-                      {i.subcategory}{" "}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
+              {edit ? (
+                <>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setMachineName(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Condition</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setCondition(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Price</Form.Label>
+                    <Form.Control
+                      type="number"
+                      min={1}
+                      onChange={(e) => setPrice(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Location</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setLocation(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Contact Number</Form.Label>
+                    <Form.Control
+                      type="tel"
+                      pattern="[0-9]{10}"
+                      onChange={(e) => setContactNumber(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Speed</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setSpeed(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Output Paper Width</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setOutput_paper_width(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Capacity</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setCapacity(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Model Number</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setModel_no(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Model Name Number</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setModel_name_number(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Brand</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setBrand(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Machine Image</Form.Label>
+                    <Form.Control
+                      type="file"
+                      multiple
+                      onChange={(e) => setmachine_images(e.target.files)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Sub-Category</Form.Label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => setsubcategory(e.target.value)}
+                    >
+                      <option>Open this select Sub-Category</option>
+                      {subCategory?.map((i, index) => (
+                        <option key={index} value={i._id}>
+                          {" "}
+                          {i.subcategory}{" "}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
 
-              <FloatingLabel
-                controlId="floatingTextarea"
-                label="Features"
-                className="mb-3"
-              >
-                <Form.Control
-                  as="textarea"
-                  onChange={(e) => setFeatures(e.target.value)}
-                />
-              </FloatingLabel>
-              <FloatingLabel
-                controlId="floatingTextarea"
-                label="About Company"
-                className="mb-3"
-              >
-                <Form.Control
-                  as="textarea"
-                  onChange={(e) => setAbout_Company(e.target.value)}
-                />
-              </FloatingLabel>
+                  <FloatingLabel
+                    controlId="floatingTextarea"
+                    label="Features"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      as="textarea"
+                      onChange={(e) => setFeatures(e.target.value)}
+                    />
+                  </FloatingLabel>
+                  <FloatingLabel
+                    controlId="floatingTextarea"
+                    label="About Company"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      as="textarea"
+                      onChange={(e) => setAbout_Company(e.target.value)}
+                    />
+                  </FloatingLabel>
 
-              <FloatingLabel
-                controlId="floatingTextarea"
-                label="Additional Info"
-                className="mb-3"
-              >
-                <Form.Control
-                  as="textarea"
-                  onChange={(e) => setAdditional_info(e.target.value)}
-                />
-              </FloatingLabel>
+                  <FloatingLabel
+                    controlId="floatingTextarea"
+                    label="Additional Info"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      as="textarea"
+                      onChange={(e) => setAdditional_info(e.target.value)}
+                    />
+                  </FloatingLabel>
+                </>
+              ) : (
+                <>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setMachineName(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Condition</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setCondition(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Price</Form.Label>
+                    <Form.Control
+                      type="number"
+                      min={1}
+                      onChange={(e) => setPrice(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Location</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setLocation(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Contact Number</Form.Label>
+                    <Form.Control
+                      type="tel"
+                      pattern="[0-9]{10}"
+                      onChange={(e) => setContactNumber(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Speed</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setSpeed(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Output Paper Width</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setOutput_paper_width(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Capacity</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setCapacity(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Model Number</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setModel_no(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Model Name Number</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setModel_name_number(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Brand</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(e) => setBrand(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Machine Image</Form.Label>
+                    <Form.Control
+                      type="file"
+                      multiple
+                      onChange={(e) => setmachine_images(e.target.files)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Sub-Category</Form.Label>
+                    <Form.Select
+                      aria-label="Default select example"
+                      onChange={(e) => setsubcategory(e.target.value)}
+                    >
+                      <option>Open this select Sub-Category</option>
+                      {subCategory?.map((i, index) => (
+                        <option key={index} value={i._id}>
+                          {" "}
+                          {i.subcategory}{" "}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
 
-            </> : <>
-            <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setMachineName(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Condition</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setCondition(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Price</Form.Label>
-                <Form.Control
-                  type="number"
-                  min={1}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Location</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Contact Number</Form.Label>
-                <Form.Control
-                  type="tel"
-                  pattern="[0-9]{10}"
-                  onChange={(e) => setContactNumber(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Speed</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setSpeed(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Output Paper Width</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setOutput_paper_width(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Capacity</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setCapacity(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Model Number</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setModel_no(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Model Name Number</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setModel_name_number(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Brand</Form.Label>
-                <Form.Control
-                  type="text"
-                  onChange={(e) => setBrand(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Machine Image</Form.Label>
-                <Form.Control
-                  type="file"
-                  multiple
-                  onChange={(e) => setmachine_images(e.target.files)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Sub-Category</Form.Label>
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => setsubcategory(e.target.value)}
-                >
-                  <option>Open this select Sub-Category</option>
-                  {subCategory?.map((i, index) => (
-                    <option key={index} value={i._id}>
-                      {" "}
-                      {i.subcategory}{" "}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
+                  <FloatingLabel
+                    controlId="floatingTextarea"
+                    label="Features"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      as="textarea"
+                      onChange={(e) => setFeatures(e.target.value)}
+                    />
+                  </FloatingLabel>
+                  <FloatingLabel
+                    controlId="floatingTextarea"
+                    label="About Company"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      as="textarea"
+                      onChange={(e) => setAbout_Company(e.target.value)}
+                    />
+                  </FloatingLabel>
 
-              <FloatingLabel
-                controlId="floatingTextarea"
-                label="Features"
-                className="mb-3"
-              >
-                <Form.Control
-                  as="textarea"
-                  onChange={(e) => setFeatures(e.target.value)}
-                />
-              </FloatingLabel>
-              <FloatingLabel
-                controlId="floatingTextarea"
-                label="About Company"
-                className="mb-3"
-              >
-                <Form.Control
-                  as="textarea"
-                  onChange={(e) => setAbout_Company(e.target.value)}
-                />
-              </FloatingLabel>
+                  <FloatingLabel
+                    controlId="floatingTextarea"
+                    label="Additional Info"
+                    className="mb-3"
+                  >
+                    <Form.Control
+                      as="textarea"
+                      onChange={(e) => setAdditional_info(e.target.value)}
+                    />
+                  </FloatingLabel>
+                </>
+              )}
 
-              <FloatingLabel
-                controlId="floatingTextarea"
-                label="Additional Info"
-                className="mb-3"
-              >
-                <Form.Control
-                  as="textarea"
-                  onChange={(e) => setAdditional_info(e.target.value)}
-                />
-              </FloatingLabel>
-
-            </> }
-            
               <Button variant="outline-success" type="submit">
                 Submit
               </Button>
@@ -417,7 +432,7 @@ const Machine = () => {
   const deleteData = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
+        `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
       );
       console.log(data);
       toast.success("Machine Deleted");
@@ -433,10 +448,10 @@ const Machine = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`
         );
         setEach(data[0]);
-        console.log(data)
+        console.log(data);
       } catch (e) {
         console.log(e);
       }

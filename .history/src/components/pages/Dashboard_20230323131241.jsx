@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
 import HOC from "../layout/HOC";
 import { MdDashboardCustomize, MdOutlineLibraryBooks } from "react-icons/md";
@@ -8,52 +10,58 @@ export const dash = (data) => {
   return data;
 };
 const Dashboard = () => {
-
-  const [ categoryCount , setCategoryCount ] = useState("")
-  const [ productCount , setProductCount ] = useState("")
-  const [ userCount , setUserCount ] = useState("")
+  const [categoryCount, setCategoryCount] = useState("");
+  const [productCount, setProductCount] = useState("");
+  const [userCount, setUserCount] = useState("");
 
   const fetchTotalCategory = async () => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/category/get/category")
-      setCategoryCount(data.total)
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/category/get/category"
+      );
+      setCategoryCount(data.total);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const fetchTotalProducts = async () => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/product//get/product")
-      setProductCount(data.total)
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/product//get/product"
+      );
+      setProductCount(data.total);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const fetchTotalUsers = async () => {
-    try{
-      const { data } = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/userroute/total")
-      setUserCount(data.Users)
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/userroute/total"
+      );
+      setUserCount(data.Users);
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const filterData = async (data) => {
-    try{
-      const { data } = await axios.get(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/adminroute/filter?filter=month`)
-    }catch(e){
-      console.log(e)
+    try {
+      const { data } = await axios.get(
+        `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/adminroute/filter?filter=month`
+      );
+    } catch (e) {
+      console.log(e);
     }
-  }
-
+  };
 
   useEffect(() => {
-    fetchTotalCategory()
-    fetchTotalProducts()
-    fetchTotalUsers()
-  },[])
+    fetchTotalCategory();
+    fetchTotalProducts();
+    fetchTotalUsers();
+  }, []);
 
   const card = [
     {
@@ -81,11 +89,8 @@ const Dashboard = () => {
   ];
   return (
     <>
-
-<div className="dropdown">
-        <p className="upper" >
-          Today Summary
-        </p>
+      <div className="dropdown">
+        <p className="upper">Today Summary</p>
         <div className="dropdown-content">
           <p> Weakly</p>
           <p> Monthly</p>
@@ -93,9 +98,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-
       <section className="grid md:grid-cols-3 grid-cols-2 gap-y-6 gap-x-4">
-    
         {card.map((card) => {
           return (
             <div className="px-5 py-8 bg-slate-200 space-y-2 shadow-xl flex flex-col  rounded-md">

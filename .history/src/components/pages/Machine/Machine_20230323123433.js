@@ -19,7 +19,7 @@ const Machine = () => {
   const getAllMachine = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
       );
       setData(data);
     } catch (err) {
@@ -30,7 +30,7 @@ const Machine = () => {
   const getSubCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
       );
       setSC(data);
     } catch (err) {
@@ -86,7 +86,7 @@ const Machine = () => {
 
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
+          "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
           fd
         );
         console.log(data);
@@ -123,7 +123,7 @@ const Machine = () => {
 
       try {
         const { data } = await axios.patch(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
           fd
         );
         console.log(data);
@@ -299,7 +299,7 @@ const Machine = () => {
   const deleteData = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
+        `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
       );
       console.log(data);
       toast.success("Machine Deleted");
@@ -315,7 +315,7 @@ const Machine = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`
         );
         setEach(data[0]);
       } catch (e) {
@@ -323,12 +323,8 @@ const Machine = () => {
       }
     };
 
-
-
     useEffect(() => {
-      setTimeout(() => {
-
-      },2000)
+      setTimeout(() => {}, 2000);
       if (props.show === true) {
         fetchData();
       }
@@ -379,9 +375,14 @@ const Machine = () => {
             <div className="cont">
               <p className="cont-p">
                 {" "}
-                Output paper width : {each?.Description?.Output_paper_width}{" "}
+                Output paper width : {
+                  each?.Description?.Output_paper_width
+                }{" "}
               </p>
-              <p className="cont-p"> Capacity : {each?.Description?.Capacity} </p>
+              <p className="cont-p">
+                {" "}
+                Capacity : {each?.Description?.Capacity}{" "}
+              </p>
             </div>
             <div className="cont">
               <p className="cont-p">
@@ -391,9 +392,7 @@ const Machine = () => {
               <p className="cont-p"> Brand : {each?.Description?.Brand} </p>
             </div>
             <div className="cont">
-              <p className="cont-p">
-              Model no: {each?.Description?.Model_no}{" "}
-              </p>
+              <p className="cont-p">Model no: {each?.Description?.Model_no} </p>
               <p className="cont-p"> Brand : {each?.subcategory} </p>
             </div>
           </Container>

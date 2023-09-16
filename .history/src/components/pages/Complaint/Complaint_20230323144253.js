@@ -17,7 +17,7 @@ const Complaint = () => {
   const getData = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/package"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/package"
       );
       setData(data);
     } catch (err) {
@@ -59,7 +59,7 @@ const Complaint = () => {
     const postData = async (e) => {
       e.preventDefault()
       try{
-          const { data } = await axios.post("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/package" , {image : url , price  , desc , valid } )
+          const { data } = await axios.post("http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/package" , {image : url , price  , desc , valid } )
           console.log(data)
           props.onHide()
           toast.success("Package Added")
@@ -71,7 +71,7 @@ const Complaint = () => {
     const EditHandler = async (e) => {
       e.preventDefault()
       try{
-          const { data } = await axios.put(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/package/update/${id}` , {price  , desc , valid } )
+          const { data } = await axios.put(`http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/package/update/${id}` , {price  , desc , valid } )
           console.log(data)
           props.onHide()
           toast.success("Package Edited")
@@ -134,7 +134,7 @@ const Complaint = () => {
 
   const deleteData = async (id) => {
     try{
-      const { data } = await axios.delete(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/package/delete/${id}`)
+      const { data } = await axios.delete(`http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/package/delete/${id}`)
       console.log(data)
       getData()
       toast.success("Package Deleted ")

@@ -18,7 +18,7 @@ const Machine = () => {
   const getAllMachine = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
       );
       setData(data);
     } catch (err) {
@@ -29,7 +29,7 @@ const Machine = () => {
   const getSubCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
       );
       setSC(data);
     } catch (err) {
@@ -85,7 +85,7 @@ const Machine = () => {
 
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
+          "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
           fd
         );
         console.log(data);
@@ -122,7 +122,7 @@ const Machine = () => {
 
       try {
         const { data } = await axios.patch(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
           fd
         );
         console.log(data);
@@ -298,7 +298,7 @@ const Machine = () => {
   const deleteData = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
+        `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
       );
       console.log(data);
       toast.success("Machine Deleted");

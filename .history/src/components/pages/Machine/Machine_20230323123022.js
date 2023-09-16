@@ -14,12 +14,12 @@ const Machine = () => {
   const [subCategory, setSC] = useState([]);
   const [edit, setEdit] = useState(false);
   const [id, setId] = useState("");
-  const [ view , setView ] = useState(false)
+  const [view, setView] = useState(false);
 
   const getAllMachine = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
       );
       setData(data);
     } catch (err) {
@@ -30,7 +30,7 @@ const Machine = () => {
   const getSubCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
       );
       setSC(data);
     } catch (err) {
@@ -86,7 +86,7 @@ const Machine = () => {
 
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
+          "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
           fd
         );
         console.log(data);
@@ -123,7 +123,7 @@ const Machine = () => {
 
       try {
         const { data } = await axios.patch(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
           fd
         );
         console.log(data);
@@ -299,7 +299,7 @@ const Machine = () => {
   const deleteData = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
+        `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
       );
       console.log(data);
       toast.success("Machine Deleted");
@@ -309,27 +309,25 @@ const Machine = () => {
     }
   };
 
-
   function ViewModal(props) {
-
-    const [ each , setEach ] = useState([])
+    const [each, setEach] = useState([]);
 
     const fetchData = async () => {
-      try{
-        const { data } = await axios.get(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`)
-        setEach(data[0])
-      }catch(e) { 
-        console.log(e)
+      try {
+        const { data } = await axios.get(
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`
+        );
+        setEach(data[0]);
+      } catch (e) {
+        console.log(e);
       }
-    } 
+    };
 
-      useEffect(() => {
-          if(props.show === true ) {
-            fetchData()
-          }
-      },[props.show])
-
-
+    useEffect(() => {
+      if (props.show === true) {
+        fetchData();
+      }
+    }, [props.show]);
 
     return (
       <Modal
@@ -346,26 +344,32 @@ const Machine = () => {
         <Modal.Body>
           <Container>
             <div className="manyImage">
-              {each?.machinePictures?.map((i , index) => (
-                <img src={i.img} alt='' key={index} />
+              {each?.machinePictures?.map((i, index) => (
+                <img src={i.img} alt="" key={index} />
               ))}
             </div>
 
             <div className="cont">
-              <p className="cont-p"> Condition :   {each?.Condition} </p>
-              <p className="cont-p"> Price :  ₹{each?.Price} </p>
+              <p className="cont-p"> Condition : {each?.Condition} </p>
+              <p className="cont-p"> Price : ₹{each?.Price} </p>
             </div>
             <div className="cont">
-              <p className="cont-p"> Location :   {each?.Location} </p>
-              <p className="cont-p"> Conatct Number :  {each?.Conatct_number} </p>
+              <p className="cont-p"> Location : {each?.Location} </p>
+              <p className="cont-p">
+                {" "}
+                Conatct Number : {each?.Conatct_number}{" "}
+              </p>
             </div>
             <div className="cont">
-              <p className="cont-p"> Features :   {each?.Features} </p>
-              <p className="cont-p"> About_company :  {each?.About_company} </p>
+              <p className="cont-p"> Features : {each?.Features} </p>
+              <p className="cont-p"> About_company : {each?.About_company} </p>
             </div>
             <div className="cont">
-              <p className="cont-p"> Additional Info :   {each?.Additional_info} </p>
-              <p className="cont-p"> Speed :  ₹{each?.Price} </p>
+              <p className="cont-p">
+                {" "}
+                Additional Info : {each?.Additional_info}{" "}
+              </p>
+              <p className="cont-p"> Speed : ₹{each?.Price} </p>
             </div>
           </Container>
         </Modal.Body>
@@ -380,10 +384,7 @@ const Machine = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
-      <ViewModal
-        show={view}
-        onHide={() => setView(false)}
-      />
+      <ViewModal show={view} onHide={() => setView(false)} />
       <section>
         <div className="pb-4 sticky top-0  w-full flex justify-between items-center bg-white">
           <span className="tracking-widest text-slate-900 font-semibold uppercase ">
@@ -466,10 +467,13 @@ const Machine = () => {
                       setModalShow(true);
                     }}
                   ></i>
-                  <i className="fa-solid fa-eye" onClick={() => {
-                    setId(i._id)
-                    setView(true)
-                  }}></i>
+                  <i
+                    className="fa-solid fa-eye"
+                    onClick={() => {
+                      setId(i._id);
+                      setView(true);
+                    }}
+                  ></i>
                 </td>
               </tr>
             ))}

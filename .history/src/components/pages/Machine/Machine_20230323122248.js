@@ -14,12 +14,12 @@ const Machine = () => {
   const [subCategory, setSC] = useState([]);
   const [edit, setEdit] = useState(false);
   const [id, setId] = useState("");
-  const [ view , setView ] = useState(false)
+  const [view, setView] = useState(false);
 
   const getAllMachine = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/machine"
       );
       setData(data);
     } catch (err) {
@@ -30,7 +30,7 @@ const Machine = () => {
   const getSubCategory = async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory"
       );
       setSC(data);
     } catch (err) {
@@ -86,7 +86,7 @@ const Machine = () => {
 
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
+          "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/addByAdmin",
           fd
         );
         console.log(data);
@@ -123,7 +123,7 @@ const Machine = () => {
 
       try {
         const { data } = await axios.patch(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/edit/machine/${id}`,
           fd
         );
         console.log(data);
@@ -299,7 +299,7 @@ const Machine = () => {
   const deleteData = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
+        `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/deletebyid/${id}`
       );
       console.log(data);
       toast.success("Machine Deleted");
@@ -309,19 +309,19 @@ const Machine = () => {
     }
   };
 
-
   function ViewModal(props) {
-
-    const [ each , setEach ] = useState([])
+    const [each, setEach] = useState([]);
 
     const fetchData = async () => {
-      try{
-        const { data } = await axios.get(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`)
-        set
-      }catch(e) { 
-        console.log(e)
+      try {
+        const { data } = await axios.get(
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/machine/get/${id}`
+        );
+        set;
+      } catch (e) {
+        console.log(e);
       }
-    } 
+    };
     return (
       <Modal
         {...props}
@@ -330,14 +330,10 @@ const Machine = () => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            
-          </Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Container>
-
-          </Container>
+          <Container></Container>
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
       </Modal>

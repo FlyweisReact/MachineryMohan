@@ -18,7 +18,7 @@ const Services = () => {
   const getService = useCallback(async () => {
     try {
       const { data } = await axios.get(
-        "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/service/get/service"
+        "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/service/get/service"
       );
       setData(data);
     } catch (err) {
@@ -29,7 +29,7 @@ const Services = () => {
   
   const getSubCategory = async () => {
     try{
-      const { data }  = await axios.get("http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory")
+      const { data }  = await axios.get("http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/subcategory/get/subcategory")
       setSC(data)
     }catch(err){
       console.log(err)
@@ -64,7 +64,7 @@ const Services = () => {
       });
       try {
         const { data } = await axios.post(
-          "http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/service/addByadmin",
+          "http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/service/addByadmin",
           fd
         );
         console.log(data);
@@ -170,7 +170,7 @@ const Services = () => {
 
   const deleteData = async (id) => {
     try{
-      const { data }  = await axios.delete(`http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/service//deletebyid/${id}`)
+      const { data }  = await axios.delete(`http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/service//deletebyid/${id}`)
       console.log(data)
       toast.success("Deleted")
       getService()
@@ -185,7 +185,7 @@ const Services = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://ec2-15-206-210-177.ap-south-1.compute.amazonaws.com:2000/service/get/${id}`
+          `http://ec2-65-1-248-95.ap-south-1.compute.amazonaws.com:2000/service/get/${id}`
         );
         setEach(data[0]);
         console.log(data)
